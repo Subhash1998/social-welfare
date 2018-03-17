@@ -1,0 +1,13 @@
+<a href="{% url 'social:home' %}"><h1>Go to home</h1></a>
+
+{% for x in post %}
+<br>{{x.name}}:{{x.ask}}<br><a href="{%url 'social:add_comment' x.id%}">comment</a><br>
+<h3>All comments</h3>
+{% for y in post2 %}
+
+{{y.user_name}}:{{y.comment}}<br>
+
+{%endfor%}
+{%endfor%}
+
+

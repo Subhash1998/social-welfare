@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+  <title>Social Welfare</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'social/base.css' %}"></style>
+  
+  
+</head>
+<body>
+
+<ul class="base">
+  <li><a class="active" href="{% url 'social:home' %}">Home</a></li>
+  <li><a href="{% url 'social:register' %}">Register</a></li>
+  <li><a href="{% url 'social:login' %}">Login</a></li>
+  <li><a href="#contact">News</a></li>
+  <li><a href="#contact">Notices</a></li>
+  <li style="float:right"><a href="#about">Contact Us</a></li>
+  <li style="float:right"><a href="#about">About</a></li>
+</ul><br>
+</body>
+{% block body %}
+{% endblock %}
+</html>

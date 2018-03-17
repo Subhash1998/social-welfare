@@ -1,0 +1,99 @@
+<html>
+<head>
+  {% load staticfiles %}
+  <title>{{user}}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'social/profile.css' %}">
+  <style type="text/css">
+    .wrapper
+{
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    box-shadow:0 0 20px 0 rgb(17, 42, 66);
+    background-color: white;
+    padding: 1em;
+    padding-bottom: 2em;
+    border-radius: .5%;
+}
+  </style>
+</head> 
+
+
+<script type="text/javascript">
+var navBar = $("#topNav");
+var hdrHeight = $("header").height();
+
+
+$(window).scroll(function() {
+  if( $(this).scrollTop() > hdrHeight + 50) {
+    navBar.addClass("navScrolled");
+  } else {
+    navBar.removeClass("navScrolled");
+  }
+});
+
+
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+} 
+</script>
+
+<body>
+  <div style="background-color:#e0cfe7; height: 30px;"></div>
+  <div style="background-color:#e0cfe7; height: 30px;" align="center"><b>{{user.first_name}}'s &nbsp;ACCOUNT</b></div>
+  <div style="background-color:#e0cfe7; height: 30px;"></div>
+
+
+  <div class ="topnav" id="myTopnav">
+  
+  <a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+  <a href="{% url 'social:home' %}">HOME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+  <a href="{% url 'social:profile' %}">My Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+  <a href="{% url 'social:question' %}">Ask Question</a>
+  <a href="{% url 'social:logout' %}"><span class="glyphicon glyphicon-log-out"></span>Logout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+
+
+           <!-- <h3 align="right">		<a href="">
+            			<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout</h3>
+            		</a>
+            	<h3 align="right">
+<a href="">--><br><br><br><br>
+ <div class="row">
+<div class="col-4">
+</div>
+		<div class="wrapper">
+      <img src="http://www.iconhot.com/icon/png/glossy/512/user-male-3.png" height="250px" align="center">
+  <center>
+    <table>
+      <tr>
+        <td class="c">USERNAME</td>
+        <td>  :  </td>
+        <td> </td>
+        <td>{{user}}</td>
+      </tr><br>
+      <tr>
+        <td class="c">NAME</td>
+        <td>: </td>
+        <td></td>
+        <td>{{user.first_name}}  {{user.last_name}}</td>
+      </tr>
+      <tr>
+        <td  class="c">E-MAIL</td>
+        <td>:  </td>
+        <td></td>
+        <td>{{user.email}}</td>
+      </tr>
+   </table>
+  </center>
+</div>
+
+</body>
+</html>

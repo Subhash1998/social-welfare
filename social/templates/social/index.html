@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<!--
+	Spatial by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		{% load staticfiles%}
+		<title>Social Welfare</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{% static 'social/main.css' %}" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	</head>
+	<body class="landing">
+
+		<!-- Header -->
+			<header id="header" class="alt">
+					
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'social:ask' %}">Discussion Forum</a></li>
+						<li><a href="{% url 'social:home' %}">Home</a></li>
+						<li><a href="{% url 'social:register' %}">REGISTER</a></li>
+						<li><a href="{% url 'social:login' %}">LOGIN</a></li>
+						<li><a href="">ABOUT US</a></li>
+						<li><a href="">CONTACT US</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
+		<!-- Banner -->
+			<section id="banner" style="background-image: url('{% static 'social/home_image.jpg' %}'), url('{% static 'social/banner.jpg' %}');"><br><br><br><br>
+				<h2>SOCIAL WELFARE</h2>
+				
+				<ul class="actions">
+					<li><a href="#" class="button special big">Get Started</a></li>
+				</ul>
+			</section>
+
+			<!-- One -->
+				<section id="one" class="wrapper style1">
+					<div class="container 75%">
+						<div class="row 200%">
+							<div class="6u 12u$(medium)">
+								<header class="major">
+									<br><h2>Fields under consideration</h2>
+								</header>
+							</div>
+							<div class="6u$ 12u$(medium)">
+								<ul style="list-style-type: none;">
+								<li><a href="https://www.urmc.rochester.edu/senior-health/common-issues/top-ten.aspx" class="button special big">HEALTH</a></li><br>
+								<li><a href="http://www.yourarticlelibrary.com/agriculture/10-major-agricultural-problems-of-india-and-their-possible-solutions/20988" class="button special big">AGRICULTURE</a></li><br>
+								<li><a href="https://www.linkedin.com/pulse/problems-solutions-unemployment-india-manikandan-viswanathan/" class="button special big">UNEMPLOYMENT</a></li><br>
+								<li><a href="https://www.weforum.org/agenda/2016/01/3-ways-we-can-tackle-youth-employment/" class="button special big">EDUCATION</a></li><br>
+								<li><a href="https://en.wikipedia.org/wiki/Stress_management" class="button special big">STRESS MANAGEMENT</a></li><br>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+
+			<!-- Two -->
+				<section id="two" class="wrapper style2 special">
+					<div class="container">
+						<header class="major">
+							<h2>HELPING HAND FOR PEOPLE</h2>
+							<p></p>
+						</header>
+						<div class="row 150%">
+							<div class="6u 12u$(xsmall)">
+								<div class="image fit captioned">
+									<img src="{% static 'social/2.jpeg' %}" alt="" />
+									<h3></h3>
+								</div>
+							</div>
+							<div class="6u$ 12u$(xsmall)">
+								<div class="image fit captioned">
+									<img src="{% static 'social/3.jpg' %}" alt="" />
+									<h3></h3>
+								</div>
+							</div>
+						</div>
+						<ul class="actions">
+							<li><a href="#" class="button special big"></a></li>
+							<li><a href="#" class="button big"></a></li>
+						</ul>
+					</div>
+				</section>
+
+			<!-- Three -->
+				<section id="three" class="wrapper style1">
+					<div class="container">
+						<div class="feature-grid">
+							<div class="feature">
+								<div class="image rounded"><img src="{% static 'social/4.jpg' %}" alt="" /></div>
+								<div class="content">
+									<header>
+										<h4>United Social Welfare Foundation</h4>	
+									</header>
+									<p>United social Welfare Foundation was established by a team of social workers who are working in the field of health, education, sustainability, vocational training, old age home, poor pepole Girls married.</p>
+								</div>
+							</div>
+							<div class="feature">
+								<div class="image rounded"><img src="{% static 'social/8.jpg' %}" alt="" /></div>
+								<div class="content">
+									<header>
+										<h4>GUIDE STAR INDIA</h4>
+										
+									</header>
+									<p>Presenting India's most credible NGOs! Partner with confidence with GuideStar India certified organisations. 18/05/2017. GuideStar India certifies NGOs based on their level of transparency & public accountability afte.</p>
+								</div>
+							</div>
+							<div class="feature">
+								<div class="image rounded"><img src="{% static 'social/6.jpg' %}" alt="" /></div>
+								<div class="content">
+									<header>
+										<h4>SUNSHINE HEALTH</h4>
+										
+									</header>
+									<p>Sunshine Health offers affordable Florida Medicaid, Medicare Plans and our Health Insurance Marketplace product, Ambetter. Get covered with Sunshine Health today.</p>
+								</div>
+							</div>
+							<div class="feature">
+								<div class="image rounded"><img src="{% static 'social/7.jpg' %}" alt="" /></div>
+								<div class="content">
+									<header>
+										<h4>SAMADHAN SOCIAL WELFARE SOCIETY</h4>
+										
+									</header>
+									<p>ABOUT SAMADHAN. "We are a Registered Welfare Society with Reg no. S/55172/2006 and the copy of registration certificate is attached. We have also registered with NGO patnership system. We are active in:- Education</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-facebook"></a></li>
+						<li><a href="#" class="icon fa-twitter"></a></li>
+						<li><a href="#" class="icon fa-instagram"></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled</li>
+						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

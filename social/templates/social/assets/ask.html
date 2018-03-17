@@ -1,0 +1,19 @@
+{% load widget_tweaks%}
+{% if registered %}
+        <strong><h3><a href="{% url 'social:home' %}">thank you for questioning</a></h3></strong>
+        {% else %}
+       <h2 style="color: purple;"><strong><center>ASK YOUR QUESTION</center></strong></h2>
+
+        <form id="form" method="post" action="{% url 'social:ask' %}" enctype="multipart/form-data">
+{% for field in form %}
+     
+       <b>{{ field.label_tag }}</b>
+       {{field}}
+        {% if field.help_text %}
+        {% endif %}
+   
+{% endfor %}
+            <!-- Provide a button to click to submit the form. -->
+            <center><input type="submit" name="submit" value="Submit" /></center>
+        </form>
+        {% endif %} 
