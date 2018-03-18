@@ -1,13 +1,37 @@
-<a href="{% url 'social:home' %}"><h1>Go to home</h1></a>
+{% extends 'social/base.html' %}
 
+{% block body%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function myFunction(x) {
+    x.classList.toggle("fa-thumbs-down");
+}
+
+
+$(document).ready(function(){
+    $("#hide").click(function(){
+        $("p").hide();
+    });
+    $("#show").click(function(){
+        $("p").show();
+    });
+});
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div style="box-shadow:  0 1px 3px 0 rgba(0,0,0,.24),
+                      0 1px 2px 0 rgba(0,0,0,.48); margin-left: 2px;">
 {% for x in post %}
-<br>{{x.name}}:{{x.ask}}<br><a href="{%url 'social:add_comment' x.id%}">comment</a><br>
+<br><div style="margin-left: 30px;">{{x.name}}:{{x.ask}}<br>
+<i onclick="myFunction(this)" class="fa fa-thumbs-up"></i><br><br>
+    <a href="{%url 'social:add_comment' x.id%}">comment</a>
 <h3>All comments</h3>
 {% for y in post2 %}
 
-{{y.user_name}}:{{y.comment}}<br>
-
+<p>{{y.user_name}}:<br>{{y.comment}}</p><br>
 {%endfor%}
 {%endfor%}
-
-
+</div>
+<button id="hide">Hide</button>
+<button id="show">Show</button>
+</div>
+{% endblock %}

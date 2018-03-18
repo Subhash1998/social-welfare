@@ -22,8 +22,11 @@ from social import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^social/',include('social.urls')),
-    url(r'^patients/',views.Users_List.as_view()),
-    url(r'^doctors/',views.Question_List.as_view()),
+    url(r'^Users_List/',views.Users_List.as_view()),
+    url(r'^questions/',views.Question_List.as_view()),
+    url(r'^post_question/',views.POST_QUESTION.as_view()),
+    url(r'^answer/',views.ANSWER_LIST.as_view()),
+
 ]
 
 

@@ -174,14 +174,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from.models import Question
-from .serializers import StockSerializer
+from .serializers import StockSerializer1,StockSerializer2,StockSerializer3,StockSerializer4
 
  
 class Users_List(APIView):
 
       def get(self,request):
           stocks = User.objects.all()
-          serializer=StockSerializer(stocks,many=True)
+          serializer=StockSerializer1(stocks,many=True)
           return Response(serializer.data)
 
       def post(self):
@@ -192,10 +192,31 @@ class Question_List(APIView):
 
       def get(self,request):
           stocks = Question.objects.all()
-          serializer=StockSerializer(stocks,many=True)
+          serializer=StockSerializer2(stocks,many=True)
           return Response(serializer.data)
 
 
       def post(self):
           pass
 
+class POST_QUESTION(APIView):
+
+      def get(self,request):
+          stocks = post_question.objects.all()
+          serializer=StockSerializer3(stocks,many=True)
+          return Response(serializer.data)
+
+      def post(self):
+          pass
+
+
+class ANSWER_LIST(APIView):
+
+      def get(self,request):
+          stocks = answer.objects.all()
+          serializer=StockSerializer4(stocks,many=True)
+          return Response(serializer.data)
+
+
+      def post(self):
+          pass
