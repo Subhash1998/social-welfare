@@ -15,7 +15,6 @@ class StockSerializer2(serializers.ModelSerializer):
 
       class Meta:
             model = Question
-            #fields = ('ticker','volume')
             fields = '__all__' 
 
 

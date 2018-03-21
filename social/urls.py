@@ -12,6 +12,9 @@ urlpatterns=[
             url(r'^question/$',views.user_question,name='question'),
             url(r'^ask_question/$',views.ask_question,name='ask'),
             url(r'^post/$',views.post,name='post'),
-            url(r'^discuss/$',views.discuss,name='discuss'),
-            url(r'^add_comment/(?P<ques_id>[0-9]+)/$',views.add_comment,name='add_comment'),
+            url(r'^add_comment/(?P<ans_id>[0-9]+)/$',views.add_comment,name='add_comment'),
+            url(r'^search/$',views.search_names,name='search'),
+            url(r'^post/(?P<pk>[0-9]+)/delete/$',views.CommentDelete.as_view(),name='comment-delete'),
+            url(r'^weather1/$',views.weather1,name='post'),
+            url(r'^weather2/$',views.weather2,name='weather2'),
 ]

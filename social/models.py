@@ -30,3 +30,5 @@ class answer(models.Model):
 	pub_date = models.DateTimeField('date published')
 	user_name = models.CharField(max_length=100)
 	comment = models.CharField(max_length=200)
+	def __str__(self):
+          return self.user_name

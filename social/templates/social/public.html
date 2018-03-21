@@ -1,4 +1,10 @@
 {% extends 'social/base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
 
 {% block body%}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -15,23 +21,117 @@ $(document).ready(function(){
     $("#show").click(function(){
         $("p").show();
     });
+
+    $('#search1').keydown(function(){
+      $.ajax({
+          type:"POST",
+          url:"/social/search/",
+      data: {
+              'search_text': $('#search1').val(),
+              'csrfmiddlewaretoken':$("input[name=csrfmiddlewaretoken]").val()
+            },
+      success: function searchSuccess(data,textStatus,jqXHR)
+              {
+                var i;
+                if(data.names.length!=0){
+                for(i=0;i<data.names.length;i++){
+                  $('#search-results').html("<li>"+data.names[i].name+"</li><br>");}
+
+              }
+                console.log(data.names.length)
+              }
+      });
+    });
 });
+ 	
 </script>
+<style type="text/css">
+	@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search {
+  width: 100%;
+  position: relative
+}
+
+.searchTerm {
+  float: left;
+  width: 100%;
+  border: 3px solid #00B4CC;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  position: absolute;  
+  right: -50px;
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  
+}
+</style>
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="What are you looking for?" id="search1">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div><br><br>
+<a id="search-results"><br>
+</a>
+</div>
+<br><br>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div style="box-shadow:  0 1px 3px 0 rgba(0,0,0,.24),
                       0 1px 2px 0 rgba(0,0,0,.48); margin-left: 2px;">
 {% for x in post %}
-<br><div style="margin-left: 30px;">{{x.name}}:{{x.ask}}<br>
-<i onclick="myFunction(this)" class="fa fa-thumbs-up"></i><br><br>
-    <a href="{%url 'social:add_comment' x.id%}">comment</a>
-<h3>All comments</h3>
-{% for y in post2 %}
+<br>
+<div style="margin-left: 0px;">
+    {{x.name}}:{{x.ask}}<br>
+     <a href="{%url 'social:add_comment' x.id%}">comment</a> 
 
-<p>{{y.user_name}}:<br>{{y.comment}}</p><br>
-{%endfor%}
+<button id="show">See all comments</button><button id="hide">Hide</button><br>
+    {% for y in x.answer_set.all %}
+      {{y.user_name}}:{{y.comment}}<br>
+      <form action="{% url 'social:comment-delete' y.id %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <input type="hidden" name="album_id" value=" {{ y.id }}"/>
+    <button type="submit" class="btn btn-default btn-sm" style="background-color: green; color: white; border-radius: 20px;">delete
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+    </form><br><br>
+    {%endfor%}
+  <br><hr>
 {%endfor%}
 </div>
-<button id="hide">Hide</button>
-<button id="show">Show</button>
+
 </div>
 {% endblock %}
+</body>
+</html>

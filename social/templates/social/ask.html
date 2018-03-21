@@ -1,7 +1,10 @@
+{%extends 'social/base.html'%}
+{%block body%}
 {% load widget_tweaks%}
+<body style="background-color: #f1e2df">
+<img src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX13129087.jpg" height="200" width="100%">
 <a href="{% url 'social:post' %}"><h5>See all comments</h5></a>
-       <a href="{% url 'social:post' %}">home</a>
-       <h2 style="color: purple;"><strong><center>ASK YOUR QUESTION</center></strong></h2>
+       <a href="{% url 'social:home' %}">home</a>
 <center>
         <form id="form" method="post" action="{% url 'social:ask' %}" enctype="multipart/form-data">
 {% for field in form %}
@@ -13,6 +16,8 @@
     <br><br>
 {% endfor %}
             <!-- Provide a button to click to submit the form. -->
-            <center><input type="submit" name="submit" value="Submit" /></center>
+            <center><input type="submit" name="submit" value="Submit" style="background-color: green; color: white; height: 60px; width:160px;" /></center>
         </form>
        </center>
+       </body>
+       {%endblock%}

@@ -1,4 +1,4 @@
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render,render_to_response,redirect
 from .forms import UserForm,question_form,discuss_form,comment_form
 from django.template import RequestContext
 from django.core.mail import send_mail
@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import datetime
-
+import requests
 # Create your views here.
 
 def IndexView(request):
@@ -122,37 +122,33 @@ def user_question(request):
 
 
 def ask_question(request):
-	context=RequestContext(request)
-	registered=False
-	if request.method=='POST':	
-		
-		form=discuss_form(data=request.POST)
+  context=RequestContext(request)
+  registered=False
+  if request.method=='POST':	
 
-		if form.is_valid():
-			form.save()
-			registered=True
-		else:
-			print form.errors
+    form=discuss_form(data=request.POST)
 
-	else:
-		form=discuss_form()
+    if form.is_valid():
+      form.save()
+      registered=True
+      return redirect('/social/post/')
+    else:
+      print form.errors
 
-	return render_to_response('social/ask.html',{'form':form,'registered':registered},context)
+  else:
+    form=discuss_form()
+
+  return render_to_response('social/ask.html',{'form':form,'registered':registered},context)
 
 def post(request):
   post=post_question.objects.all()
-  post2=answer.objects.all()
+  post2 = answer.objects.all()
   return render(request,'social/public.html',{'post':post,'post2':post2})
 
 
-def discuss(request):
-    return render(request, 'social/public.html')
-
-
-def add_comment(request,ques_id):
-  ans=get_object_or_404(post_question,pk=ques_id)
+def add_comment(request,ans_id):
+  ans=get_object_or_404(post_question,pk=ans_id)
   form=comment_form(request.POST)
-  print ques_id
   print form.is_valid()
   if form.is_valid():
     print "this"
@@ -162,12 +158,13 @@ def add_comment(request,ques_id):
     add.user_name=user_name
     add.comment=comment
     add.pub_date = datetime.datetime.now()
-    ob=post_question.objects.get(id=ques_id)
+    ob=post_question.objects.get(id=ans_id)
     add.ques=ob
     add.save()
-    return HttpResponseRedirect(reverse('social:add_comment', args=(ans.id,)))
-    
+    return redirect('/social/post/')
+
   return render(request, 'social/comment.html', {'ans': ans, 'form': form})
+
 
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
@@ -220,3 +217,785 @@ class ANSWER_LIST(APIView):
 
       def post(self):
           pass
+
+
+def like_article(request,ans_id):
+  if ans_id:
+    a=post_question.objects.get(id=ans_id)
+    count=a.likes
+    count+=1
+    a.likes=count
+    a.save()
+  return redirect('/social/post/') 
+    
+
+from django.http import JsonResponse
+def search_names(request):
+  if request.method=='POST':
+    search_text=request.POST['search_text']
+  else:
+    search_text=''
+  names=answer.objects.filter(user_name__contains=search_text)
+  level_list = []
+  temp_data = {}
+  for name in names:
+    temp_data = {
+                "name": name.user_name,
+              }
+    level_list.append(temp_data)
+    temp_data = {}
+  data = {
+    "success": True,
+    "names" : level_list,
+  }
+  return JsonResponse(data,safe=False)
+
+
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic.edit import DeleteView
+class CommentDelete(DeleteView):
+  model=answer
+  success_url=reverse_lazy('social:post')
+
+
+from .forms import weather_form
+def weather1(request):
+  form=weather_form()
+  return render_to_response('social/weather.html',{'form':form})
+
+
+
+def weather2(request):
+  if request.method=='POST':
+    form=weather_form(data=request.POST)
+    if form.is_valid:
+      city=form['city'].value()
+      city=city.upper()
+      api_address='http://api.openweathermap.org/data/2.5/weather?appid=578d43fc73ac077f3e7666baf2444681&q='
+      url = api_address + city
+
+      json_data = requests.get(url).json()
+      formatted_data = json_data['weather'][0]['description']
+
+      print(formatted_data)
+  return HttpResponse(formatted_data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

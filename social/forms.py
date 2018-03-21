@@ -61,6 +61,9 @@ class comment_form(forms.ModelForm):
 		model = answer
 		fields = ['user_name', 'comment']
 		widgets = {
-    	'comment': Textarea(attrs={'cols': 40, 'rows': 15}),
+    	'comment': Textarea(attrs={'cols': 45, 'rows': 20,},),
 		}
 
+class weather_form(forms.Form):
+	city = forms.CharField(max_length=30)
+	fields=['city']
