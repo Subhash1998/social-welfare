@@ -259,9 +259,12 @@ class CommentDelete(DeleteView):
 
 
 from .forms import weather_form
+from bs4 import BeautifulSoup
+import requests
+
 def weather1(request):
-  form=weather_form()
-  return render_to_response('social/weather.html',{'form':form})
+      form=weather_form()
+      return render_to_response('social/weather.html',{'form':form})
 
 
 
@@ -278,7 +281,42 @@ def weather2(request):
       formatted_data = json_data['weather'][0]['description']
 
       print(formatted_data)
+
   return HttpResponse(formatted_data)
+
+
+from .forms import place_form
+
+def place1(request):
+      registered=False
+      form=place_form()
+      return render_to_response('social/place.html',{'form':form,'registered':registered})
+
+
+
+def place2(request):
+  if request.method=='POST':
+    registered=False
+    form=place_form(data=request.POST)
+    if form.is_valid:
+      place=form['place'].value()
+      place=place.upper()
+      url1="https://maps.googleapis.com/maps/api/place/textsearch/json?query=institutes+in+"
+      url2="&key=AIzaSyC4OhYMuUOPP9EYkol9E9IoGShu4nlkNEw"
+      # name=raw_input('Enter your location : ')
+      url=url1+place+url2
+      response = requests.get(url)
+      #print response.content
+      responsej = response.json()
+      address=[]
+      registered=True
+      for i in range(0,len(responsej['results'])):
+        address2 = responsej['results'][i]['name']
+        address.append(address2)
+  return render_to_response('social/place.html',{'address':address,'registered':registered})
+  #return JsonResponse(data,safe=False)
+
+
 
 
 

@@ -1,0 +1,10 @@
+{% if registered is False %}
+<form method="post" action="/social/place2/">
+	{{form.as_p}}
+	<button type="submit" value="submit">Submit</button>
+</form>
+{%endif%}
+
+{% for add in address %}
+	<a style="cursor:pointer; text-decoration-line: none; color:red;" href="#">{{add}}</a><br><br>
+{%endfor%}

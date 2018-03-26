@@ -67,3 +67,8 @@ class comment_form(forms.ModelForm):
 class weather_form(forms.Form):
 	city = forms.CharField(max_length=30)
 	fields=['city']
+
+
+class place_form(forms.Form):
+	place = forms.CharField(max_length=30)
+	fields=['place']

@@ -17,4 +17,6 @@ urlpatterns=[
             url(r'^post/(?P<pk>[0-9]+)/delete/$',views.CommentDelete.as_view(),name='comment-delete'),
             url(r'^weather1/$',views.weather1,name='post'),
             url(r'^weather2/$',views.weather2,name='weather2'),
+            url(r'^place1/$',views.place1,name='place1'),
+            url(r'^place2/$',views.place2,name='place2'),
 ]
